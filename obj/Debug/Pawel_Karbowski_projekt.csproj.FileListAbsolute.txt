@@ -1,0 +1,13 @@
+C:\Users\Samuraj\source\repos\Pawel_Karbowski_projekt\bin\Debug\Pawel_Karbowski_projekt.exe.config
+C:\Users\Samuraj\source\repos\Pawel_Karbowski_projekt\bin\Debug\Pawel_Karbowski_projekt.exe
+C:\Users\Samuraj\source\repos\Pawel_Karbowski_projekt\bin\Debug\Pawel_Karbowski_projekt.pdb
+C:\Users\Samuraj\source\repos\Pawel_Karbowski_projekt\obj\Debug\Pawel_Karbowski_projekt.csprojAssemblyReference.cache
+C:\Users\Samuraj\source\repos\Pawel_Karbowski_projekt\obj\Debug\Pawel_Karbowski_projekt.MainForm.resources
+C:\Users\Samuraj\source\repos\Pawel_Karbowski_projekt\obj\Debug\Pawel_Karbowski_projekt.Properties.Resources.resources
+C:\Users\Samuraj\source\repos\Pawel_Karbowski_projekt\obj\Debug\Pawel_Karbowski_projekt.csproj.GenerateResource.cache
+C:\Users\Samuraj\source\repos\Pawel_Karbowski_projekt\obj\Debug\Pawel_Karbowski_projekt.csproj.CoreCompileInputs.cache
+C:\Users\Samuraj\source\repos\Pawel_Karbowski_projekt\obj\Debug\Pawel_Karbowski_projekt.exe
+C:\Users\Samuraj\source\repos\Pawel_Karbowski_projekt\obj\Debug\Pawel_Karbowski_projekt.pdb
+C:\Users\Samuraj\source\repos\Pawel_Karbowski_projekt\obj\Debug\Pawel_Karbowski_projekt.FormCreateNote.resources
+C:\Users\Samuraj\source\repos\Pawel_Karbowski_projekt\obj\Debug\Pawel_Karbowski_projekt.FormEdit.resources
+C:\Users\Samuraj\source\repos\Pawel_Karbowski_projekt\obj\Debug\Pawel_Karbowski_projekt.FormOpen.resources
