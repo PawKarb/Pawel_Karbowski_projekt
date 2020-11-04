@@ -74,7 +74,6 @@ namespace Pawel_Karbowski_projekt
             TextWriter writeFileCfg = new System.IO.StreamWriter(cfgFile);
             XmlSerializer serializer = new XmlSerializer(typeof(Note));
             serializer.Serialize(writeFileCfg, notatka);
-            writeFileCfg.Close();
             saveFile();
         }
 
