@@ -42,7 +42,6 @@
             this.btnBack = new System.Windows.Forms.Button();
             this.btnFontChange = new System.Windows.Forms.Button();
             this.btnColorChange = new System.Windows.Forms.Button();
-            this.saveFileDialog = new System.Windows.Forms.SaveFileDialog();
             this.comboBoxExt = new System.Windows.Forms.ComboBox();
             this.label5 = new System.Windows.Forms.Label();
             this.SuspendLayout();
@@ -244,7 +243,6 @@
         private System.Windows.Forms.Button btnBack;
         private System.Windows.Forms.Button btnFontChange;
         private System.Windows.Forms.Button btnColorChange;
-        private System.Windows.Forms.SaveFileDialog saveFileDialog;
         private System.Windows.Forms.ComboBox comboBoxExt;
         private System.Windows.Forms.Label label5;
     }

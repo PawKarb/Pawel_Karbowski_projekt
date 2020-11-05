@@ -70,10 +70,12 @@ namespace Pawel_Karbowski_projekt
             waznoscNotatki = ComboBoxImportance.Text;
             tekstNotatki = richTextNote.Text;
             powiadomienie = notificationCheckBox.Checked;
+
+            //tworzenie obiektu i dodawanie do listy
             Note notatka = new Note(nazwaNotatki, dataNotatki, waznoscNotatki, tekstNotatki, powiadomienie);
             MainForm.saveNoteInList(notatka);
-            TextWriter writeFileCfg = new System.IO.StreamWriter(cfgFile);
-            XmlSerializer serializer = new XmlSerializer(typeof(List<Note>));
+            TextWriter writeFileCfg = new StreamWriter(cfgFile);
+            XmlSerializer serializer = new XmlSerializer(typeof(List<Note>), new XmlRootAttribute("Notes"));
             serializer.Serialize(writeFileCfg, MainForm.ListofNotes);
             writeFileCfg.Close();
             saveFile();
@@ -94,9 +96,9 @@ namespace Pawel_Karbowski_projekt
 
         private void btnFontChange_Click(object sender, EventArgs e)
         {
-            FontDialog fontDialog = new FontDialog();
-            fontDialog.ShowDialog();
-            richTextNote.SelectionFont = fontDialog.Font;
+            ColorDialog colorDialog = new ColorDialog();
+            colorDialog.ShowDialog();
+            richTextNote.SelectionColor = colorDialog.Color;
         }
 
         private void btnColorChange_Click(object sender, EventArgs e)

@@ -8,6 +8,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Xml;
+using System.Xml.Serialization;
 
 namespace Pawel_Karbowski_projekt
 {
@@ -25,10 +27,19 @@ namespace Pawel_Karbowski_projekt
             {
                 Directory.CreateDirectory(rootFolder);
             }
-            if (!File.Exists(cfgFile)) 
+            if (!File.Exists(cfgFile))
             {
-                File.Create(cfgFile);
+                var myFile = File.Create(cfgFile);
+                myFile.Close();
             }
+            else 
+            {
+                Stream xmlReader = new FileStream(cfgFile, FileMode.Open);
+                XmlSerializer serializer = new XmlSerializer(typeof(List<Note>),new XmlRootAttribute("Notes"));
+                ListofNotes = (List<Note>)serializer.Deserialize(xmlReader);
+                xmlReader.Close();
+            }
+
         }
         public static void saveNoteInList(Note note) {
             ListofNotes.Add(note);
@@ -72,6 +83,10 @@ namespace Pawel_Karbowski_projekt
 
         private void btnNotif_Click(object sender, EventArgs e)
         {
+            foreach (Note lnote in ListofNotes)
+            {
+                DialogResult result = MessageBox.Show(lnote.ToString());
+            }
         }
 
         private void btnShow_Click(object sender, EventArgs e)

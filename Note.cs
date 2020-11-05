@@ -25,8 +25,9 @@ namespace Pawel_Karbowski_projekt
         }
         public override string ToString()
         {
-            return name;
+            return name + ", " + dateNote + ", " + importance + ", " + textNote +", "+ isNotification;
         }
+
 
     }
 }

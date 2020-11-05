@@ -31,9 +31,18 @@ namespace Pawel_Karbowski_projekt
             }
         }
 
-        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        private void btnFontChange_Click(object sender, EventArgs e)
         {
+            ColorDialog colorDialog = new ColorDialog();
+            colorDialog.ShowDialog();
+            richTextBox1.SelectionColor = colorDialog.Color;
+        }
 
+        private void btnColorChange_Click(object sender, EventArgs e)
+        {
+            ColorDialog colorDialog = new ColorDialog();
+            colorDialog.ShowDialog();
+            richTextBox1.SelectionColor = colorDialog.Color;
         }
     }
 }

@@ -38,6 +38,8 @@
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.btnSaveNote = new System.Windows.Forms.Button();
             this.btnBack = new System.Windows.Forms.Button();
+            this.btnFontChange = new System.Windows.Forms.Button();
+            this.btnColorChange = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // label4
@@ -53,9 +55,9 @@
             // 
             // richTextBox1
             // 
-            this.richTextBox1.Location = new System.Drawing.Point(12, 174);
+            this.richTextBox1.Location = new System.Drawing.Point(12, 203);
             this.richTextBox1.Name = "richTextBox1";
-            this.richTextBox1.Size = new System.Drawing.Size(360, 375);
+            this.richTextBox1.Size = new System.Drawing.Size(360, 346);
             this.richTextBox1.TabIndex = 14;
             this.richTextBox1.Text = "";
             // 
@@ -67,7 +69,6 @@
             this.comboBoxImportance.Name = "comboBoxImportance";
             this.comboBoxImportance.Size = new System.Drawing.Size(214, 23);
             this.comboBoxImportance.TabIndex = 13;
-            this.comboBoxImportance.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
             // 
             // label3
             // 
@@ -137,11 +138,35 @@
             this.btnBack.UseVisualStyleBackColor = true;
             this.btnBack.Click += new System.EventHandler(this.btnBack_Click);
             // 
+            // btnFontChange
+            // 
+            this.btnFontChange.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.btnFontChange.Location = new System.Drawing.Point(12, 173);
+            this.btnFontChange.Name = "btnFontChange";
+            this.btnFontChange.Size = new System.Drawing.Size(80, 24);
+            this.btnFontChange.TabIndex = 18;
+            this.btnFontChange.Text = "Czcionka";
+            this.btnFontChange.UseVisualStyleBackColor = true;
+            this.btnFontChange.Click += new System.EventHandler(this.btnFontChange_Click);
+            // 
+            // btnColorChange
+            // 
+            this.btnColorChange.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.btnColorChange.Location = new System.Drawing.Point(292, 173);
+            this.btnColorChange.Name = "btnColorChange";
+            this.btnColorChange.Size = new System.Drawing.Size(80, 24);
+            this.btnColorChange.TabIndex = 19;
+            this.btnColorChange.Text = "Kolor";
+            this.btnColorChange.UseVisualStyleBackColor = true;
+            this.btnColorChange.Click += new System.EventHandler(this.btnColorChange_Click);
+            // 
             // FormEdit
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(384, 621);
+            this.Controls.Add(this.btnColorChange);
+            this.Controls.Add(this.btnFontChange);
             this.Controls.Add(this.btnBack);
             this.Controls.Add(this.btnSaveNote);
             this.Controls.Add(this.label4);
@@ -173,5 +198,7 @@
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.Button btnSaveNote;
         private System.Windows.Forms.Button btnBack;
+        private System.Windows.Forms.Button btnFontChange;
+        private System.Windows.Forms.Button btnColorChange;
     }
 }
