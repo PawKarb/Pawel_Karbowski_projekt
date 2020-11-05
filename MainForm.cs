@@ -13,11 +13,14 @@ namespace Pawel_Karbowski_projekt
 {
     public partial class MainForm : Form
     {
+        public static List<Note> ListofNotes = new List<Note>();
+        private String rootFolder;
+        private String cfgFile;
         public MainForm()
         {
             InitializeComponent();
-            String rootFolder = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "Notatki_projekt");
-            String cfgFile = rootFolder + "\\noteConfig.xml";
+            rootFolder = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "Notatki_projekt");
+            cfgFile = rootFolder + "\\noteConfig.xml";
             if (!Directory.Exists(rootFolder))
             {
                 Directory.CreateDirectory(rootFolder);
@@ -27,7 +30,9 @@ namespace Pawel_Karbowski_projekt
                 File.Create(cfgFile);
             }
         }
-
+        public static void saveNoteInList(Note note) {
+            ListofNotes.Add(note);
+        }
         private void btnNew_Click(object sender, EventArgs e)
         {
             FormCreateNote noteForm = new FormCreateNote();
@@ -63,6 +68,15 @@ namespace Pawel_Karbowski_projekt
         {
             FormEdit formEdit = new FormEdit();
             formEdit.Show();
+        }
+
+        private void btnNotif_Click(object sender, EventArgs e)
+        {
+        }
+
+        private void btnShow_Click(object sender, EventArgs e)
+        {
+            System.Diagnostics.Process.Start(rootFolder);
         }
     }
 }

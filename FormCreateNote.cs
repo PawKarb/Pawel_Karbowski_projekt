@@ -71,9 +71,10 @@ namespace Pawel_Karbowski_projekt
             tekstNotatki = richTextNote.Text;
             powiadomienie = notificationCheckBox.Checked;
             Note notatka = new Note(nazwaNotatki, dataNotatki, waznoscNotatki, tekstNotatki, powiadomienie);
+            MainForm.saveNoteInList(notatka);
             TextWriter writeFileCfg = new System.IO.StreamWriter(cfgFile);
-            XmlSerializer serializer = new XmlSerializer(typeof(Note));
-            serializer.Serialize(writeFileCfg, notatka);
+            XmlSerializer serializer = new XmlSerializer(typeof(List<Note>));
+            serializer.Serialize(writeFileCfg, MainForm.ListofNotes);
             writeFileCfg.Close();
             saveFile();
         }

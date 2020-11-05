@@ -23,5 +23,10 @@ namespace Pawel_Karbowski_projekt
         }
         public Note() { 
         }
+        public override string ToString()
+        {
+            return name;
+        }
+
     }
 }

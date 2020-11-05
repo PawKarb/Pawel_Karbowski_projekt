@@ -39,6 +39,7 @@
             this.btnDelete = new System.Windows.Forms.Button();
             this.btnNotif = new System.Windows.Forms.Button();
             this.btnExit = new System.Windows.Forms.Button();
+            this.btnShow = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // NoteListBox
@@ -127,6 +128,7 @@
             this.btnNotif.TabIndex = 9;
             this.btnNotif.Text = "Powiadomienia";
             this.btnNotif.UseVisualStyleBackColor = true;
+            this.btnNotif.Click += new System.EventHandler(this.btnNotif_Click);
             // 
             // btnExit
             // 
@@ -139,12 +141,24 @@
             this.btnExit.UseVisualStyleBackColor = true;
             this.btnExit.Click += new System.EventHandler(this.btnExit_Click);
             // 
+            // btnShow
+            // 
+            this.btnShow.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.btnShow.Location = new System.Drawing.Point(248, 346);
+            this.btnShow.Name = "btnShow";
+            this.btnShow.Size = new System.Drawing.Size(175, 50);
+            this.btnShow.TabIndex = 11;
+            this.btnShow.Text = "Przeglądaj";
+            this.btnShow.UseVisualStyleBackColor = true;
+            this.btnShow.Click += new System.EventHandler(this.btnShow_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.ClientSize = new System.Drawing.Size(709, 476);
+            this.Controls.Add(this.btnShow);
             this.Controls.Add(this.btnExit);
             this.Controls.Add(this.btnNotif);
             this.Controls.Add(this.btnDelete);
@@ -177,6 +191,7 @@
         private System.Windows.Forms.Button btnDelete;
         private System.Windows.Forms.Button btnNotif;
         private System.Windows.Forms.Button btnExit;
+        private System.Windows.Forms.Button btnShow;
     }
 }
 
