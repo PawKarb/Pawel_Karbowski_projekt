@@ -15,7 +15,7 @@ namespace Pawel_Karbowski_projekt
 {
     public partial class MainForm : Form
     {
-        public static List<Note> ListofNotes = new List<Note>();
+        public List<Note> ListofNotes = new List<Note>();
         private String rootFolder;
         private String cfgFile;
         public MainForm()
@@ -32,22 +32,28 @@ namespace Pawel_Karbowski_projekt
                 var myFile = File.Create(cfgFile);
                 myFile.Close();
             }
-            else 
+            else if(new FileInfo(cfgFile).Length != 0)
             {
                 Stream xmlReader = new FileStream(cfgFile, FileMode.Open);
                 XmlSerializer serializer = new XmlSerializer(typeof(List<Note>),new XmlRootAttribute("Notes"));
                 ListofNotes = (List<Note>)serializer.Deserialize(xmlReader);
+                addNoteInListBox();
                 xmlReader.Close();
             }
 
         }
-        public static void saveNoteInList(Note note) {
+        public void addNoteInListBox() {
+            foreach (Note lnote in ListofNotes)
+            {
+                NoteListBox.Items.Add(lnote.name);
+            }
+        }
+        public void saveNoteInList(Note note) {
             ListofNotes.Add(note);
         }
         private void btnNew_Click(object sender, EventArgs e)
         {
-            FormCreateNote noteForm = new FormCreateNote();
-            noteForm.Show();
+            new FormCreateNote(this).Show();
         }
 
         private void btnOpen_Click(object sender, EventArgs e)

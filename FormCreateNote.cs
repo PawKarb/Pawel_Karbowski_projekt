@@ -21,14 +21,16 @@ namespace Pawel_Karbowski_projekt
         private String tekstNotatki;
         private Boolean powiadomienie = false;
         private String rootFolder = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "Notatki_projekt");
-        public FormCreateNote()
+        private MainForm mainForm;
+        public FormCreateNote(MainForm mForm)
         {
             InitializeComponent();
             ComboBoxImportance.DataSource = Enum.GetValues(typeof(importance));
             comboBoxExt.Text = "Wybierz rozszerzenie pliku...";
             comboBoxExt.Items.Add("plik tekstowy (.txt)");
             comboBoxExt.Items.Add("plik sformatowany (.rtf)");
-        }
+            mainForm = mForm;
+    }
         private void saveFile() {
             String filePath = "";
             if (comboBoxExt.SelectedIndex == 0)
@@ -73,11 +75,12 @@ namespace Pawel_Karbowski_projekt
 
             //tworzenie obiektu i dodawanie do listy
             Note notatka = new Note(nazwaNotatki, dataNotatki, waznoscNotatki, tekstNotatki, powiadomienie);
-            MainForm.saveNoteInList(notatka);
+            mainForm.saveNoteInList(notatka);
             TextWriter writeFileCfg = new StreamWriter(cfgFile);
             XmlSerializer serializer = new XmlSerializer(typeof(List<Note>), new XmlRootAttribute("Notes"));
-            serializer.Serialize(writeFileCfg, MainForm.ListofNotes);
+            serializer.Serialize(writeFileCfg, mainForm.ListofNotes);
             writeFileCfg.Close();
+            mainForm.NoteListBox.Items.Insert(0,notatka.name);
             saveFile();
         }
 

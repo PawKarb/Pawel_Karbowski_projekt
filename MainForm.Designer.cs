@@ -44,10 +44,12 @@
             // 
             // NoteListBox
             // 
+            this.NoteListBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
             this.NoteListBox.FormattingEnabled = true;
+            this.NoteListBox.ItemHeight = 20;
             this.NoteListBox.Location = new System.Drawing.Point(12, 42);
             this.NoteListBox.Name = "NoteListBox";
-            this.NoteListBox.Size = new System.Drawing.Size(230, 394);
+            this.NoteListBox.Size = new System.Drawing.Size(230, 384);
             this.NoteListBox.TabIndex = 0;
             // 
             // label2
@@ -180,8 +182,6 @@
         }
 
         #endregion
-
-        private System.Windows.Forms.ListBox NoteListBox;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Button btnNew;
         private System.Windows.Forms.Button btnOpen;
@@ -192,6 +192,7 @@
         private System.Windows.Forms.Button btnNotif;
         private System.Windows.Forms.Button btnExit;
         private System.Windows.Forms.Button btnShow;
+        public System.Windows.Forms.ListBox NoteListBox;
     }
 }
 
