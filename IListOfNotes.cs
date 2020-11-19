@@ -6,12 +6,9 @@ using System.Threading.Tasks;
 
 namespace Pawel_Karbowski_projekt
 {
-    public enum Importance
+    interface IListOfNotes
     {
-        BRAK,
-        OPCJONALNY,
-        STANDARDOWY,
-        PILNY,
-        NAJWAZNIEJSZY    
+        void saveNoteList(Note note);
+        void delNoteList(Note note);
     }
 }

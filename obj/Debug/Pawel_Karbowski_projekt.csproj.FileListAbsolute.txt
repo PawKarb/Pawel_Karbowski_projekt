@@ -11,3 +11,4 @@ C:\Users\Samuraj\source\repos\Pawel_Karbowski_projekt\obj\Debug\Pawel_Karbowski_
 C:\Users\Samuraj\source\repos\Pawel_Karbowski_projekt\obj\Debug\Pawel_Karbowski_projekt.FormCreateNote.resources
 C:\Users\Samuraj\source\repos\Pawel_Karbowski_projekt\obj\Debug\Pawel_Karbowski_projekt.FormEdit.resources
 C:\Users\Samuraj\source\repos\Pawel_Karbowski_projekt\obj\Debug\Pawel_Karbowski_projekt.FormOpen.resources
+C:\Users\Samuraj\source\repos\Pawel_Karbowski_projekt\obj\Debug\Pawel_Karbowski_projekt.FormNotification.resources

@@ -13,11 +13,15 @@ using System.Xml.Serialization;
 
 namespace Pawel_Karbowski_projekt
 {
-    public partial class MainForm : Form
+    public partial class MainForm : Form, INoteListBox, IListOfNotes
     {
         public List<Note> ListofNotes = new List<Note>();
         private String rootFolder;
         private String cfgFile;
+        private FormCreateNote createNote;
+        private FormEdit formEdit;
+        private FormOpen formOpen;
+        private FormNotification formNotification;
         public MainForm()
         {
             InitializeComponent();
@@ -32,38 +36,32 @@ namespace Pawel_Karbowski_projekt
                 var myFile = File.Create(cfgFile);
                 myFile.Close();
             }
-            else if(new FileInfo(cfgFile).Length != 0)
+            else if (new FileInfo(cfgFile).Length != 0)
             {
                 Stream xmlReader = new FileStream(cfgFile, FileMode.Open);
-                XmlSerializer serializer = new XmlSerializer(typeof(List<Note>),new XmlRootAttribute("Notes"));
+                XmlSerializer serializer = new XmlSerializer(typeof(List<Note>), new XmlRootAttribute("Notes"));
                 ListofNotes = (List<Note>)serializer.Deserialize(xmlReader);
-                addNoteInListBox();
+                addNoteListBox();
                 xmlReader.Close();
             }
 
         }
-        public void addNoteInListBox() {
-            foreach (Note lnote in ListofNotes)
-            {
-                NoteListBox.Items.Add(lnote.name);
-            }
-        }
-        public void saveNoteInList(Note note) {
-            ListofNotes.Add(note);
-        }
         private void btnNew_Click(object sender, EventArgs e)
         {
-            new FormCreateNote(this).Show();
+            createNote = new FormCreateNote(this);
+            createNote.Show();
+
         }
 
         private void btnOpen_Click(object sender, EventArgs e)
         {
             try
             {
-                FormOpen openForm = new FormOpen();
-                openForm.Show();
+                formOpen = new FormOpen();
+                formOpen.Show();
             }
-            catch(ObjectDisposedException) {
+            catch (ObjectDisposedException)
+            {
                 return;
             }
         }
@@ -83,21 +81,76 @@ namespace Pawel_Karbowski_projekt
 
         private void btnEdit_Click(object sender, EventArgs e)
         {
-            FormEdit formEdit = new FormEdit();
-            formEdit.Show();
+            int element = NoteListBox.SelectedIndex;
+            if (element != -1)
+            {
+                formEdit = new FormEdit();
+                formEdit.Show();
+            }
+            else
+            {
+                MessageBox.Show("Nie zaznaczono elementu!", "Błąd!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void btnNotif_Click(object sender, EventArgs e)
         {
-            foreach (Note lnote in ListofNotes)
-            {
-                DialogResult result = MessageBox.Show(lnote.ToString());
-            }
+            formNotification = new FormNotification();
+            formNotification.Show();
         }
 
         private void btnShow_Click(object sender, EventArgs e)
         {
             System.Diagnostics.Process.Start(rootFolder);
+        }
+        public void saveNoteList(Note note)
+        {
+            ListofNotes.Add(note);
+        }
+        public void addNoteListBox()
+        {
+            foreach (Note lnote in ListofNotes)
+            {
+                NoteListBox.Items.Add(lnote.name);
+            }
+        }
+        public void delNoteListBox()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void delNoteList(Note note)
+        {
+            throw new NotImplementedException();
+        }
+
+        private void btnDelete_Click(object sender, EventArgs e)
+        {
+            int element = NoteListBox.SelectedIndex;
+            if (element != -1)
+            {
+                return;
+            }
+            else
+            {
+                MessageBox.Show("Nie zaznaczono elementu!", "Błąd!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+        private void btnClear_Click(object sender, EventArgs e)
+        {
+            int elements = NoteListBox.Items.Count;
+            if (elements > 0)
+            {
+                DialogResult dialogResult = MessageBox.Show("Czy chcesz usunąć wszystkie elementy z listy?", "Błąd!", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                if (dialogResult == DialogResult.No)
+                {
+                    return;
+                }
+                else
+                {
+                    return;
+                }
+            }
         }
     }
 }

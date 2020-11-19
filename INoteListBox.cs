@@ -6,12 +6,9 @@ using System.Threading.Tasks;
 
 namespace Pawel_Karbowski_projekt
 {
-    public enum Importance
+    interface INoteListBox
     {
-        BRAK,
-        OPCJONALNY,
-        STANDARDOWY,
-        PILNY,
-        NAJWAZNIEJSZY    
+         void addNoteListBox();
+         void delNoteListBox();
     }
 }

@@ -17,35 +17,48 @@ namespace Pawel_Karbowski_projekt
     {
         private String nazwaNotatki;
         private String dataNotatki;
-        private String waznoscNotatki;
+        private Importance importance;
         private String tekstNotatki;
         private Boolean powiadomienie = false;
         private String rootFolder = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "Notatki_projekt");
         private MainForm mainForm;
+        private Note notatka;
         public FormCreateNote(MainForm mForm)
         {
             InitializeComponent();
-            ComboBoxImportance.DataSource = Enum.GetValues(typeof(importance));
+            ComboBoxImportance.DataSource = Enum.GetValues(typeof(Importance));
             comboBoxExt.Text = "Wybierz rozszerzenie pliku...";
             comboBoxExt.Items.Add("plik tekstowy (.txt)");
             comboBoxExt.Items.Add("plik sformatowany (.rtf)");
             mainForm = mForm;
-    }
+        }
+        private void createNote() {
+            String cfgFile = rootFolder + "\\noteConfig.xml";
+            notatka = new Note(nazwaNotatki, dataNotatki, importance, tekstNotatki, powiadomienie);
+            mainForm.saveNoteList(notatka);
+            TextWriter writeFileCfg = new StreamWriter(cfgFile);
+            XmlSerializer serializer = new XmlSerializer(typeof(List<Note>), new XmlRootAttribute("Notes"));
+            serializer.Serialize(writeFileCfg, mainForm.ListofNotes);
+            writeFileCfg.Close();
+            mainForm.NoteListBox.Items.Insert(0, notatka.name);
+        }
         private void saveFile() {
             String filePath = "";
             if (comboBoxExt.SelectedIndex == 0)
             {
                 filePath = rootFolder + "\\" + nazwaNotatki + ".txt";
                 StreamWriter createLocalFile = new StreamWriter(filePath);
-                createLocalFile.WriteLine("Ważność notatki: " + waznoscNotatki, Encoding.UTF8);
+                createLocalFile.WriteLine("Ważność notatki: " + importance, Encoding.UTF8);
                 createLocalFile.WriteLine(dataNotatki, Encoding.UTF8);
                 createLocalFile.Write(tekstNotatki, Encoding.UTF8);
                 createLocalFile.Close();
+                createNote();
             }
             else if (comboBoxExt.SelectedIndex == 1)
             {
                 filePath = rootFolder + "\\" + nazwaNotatki + ".rtf";
                 richTextNote.SaveFile(filePath, RichTextBoxStreamType.RichText);
+                createNote();
             }
             else 
             {
@@ -66,21 +79,11 @@ namespace Pawel_Karbowski_projekt
         }
         private void btnCreateNote_Click(object sender, EventArgs e)
         {
-            String cfgFile = rootFolder + "\\noteConfig.xml";
             nazwaNotatki = textBoxName.Text;
             dataNotatki = datePickerNote.Value.ToShortDateString();
-            waznoscNotatki = ComboBoxImportance.Text;
+            importance = (Importance)Enum.Parse(typeof(Importance), ComboBoxImportance.Text);
             tekstNotatki = richTextNote.Text;
             powiadomienie = notificationCheckBox.Checked;
-
-            //tworzenie obiektu i dodawanie do listy
-            Note notatka = new Note(nazwaNotatki, dataNotatki, waznoscNotatki, tekstNotatki, powiadomienie);
-            mainForm.saveNoteInList(notatka);
-            TextWriter writeFileCfg = new StreamWriter(cfgFile);
-            XmlSerializer serializer = new XmlSerializer(typeof(List<Note>), new XmlRootAttribute("Notes"));
-            serializer.Serialize(writeFileCfg, mainForm.ListofNotes);
-            writeFileCfg.Close();
-            mainForm.NoteListBox.Items.Insert(0,notatka.name);
             saveFile();
         }
 

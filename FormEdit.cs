@@ -12,10 +12,11 @@ namespace Pawel_Karbowski_projekt
 {
     public partial class FormEdit : Form
     {
+
         public FormEdit()
         {
             InitializeComponent();
-            comboBoxImportance.DataSource = Enum.GetValues(typeof(importance));
+            comboBoxImportance.DataSource = Enum.GetValues(typeof(Importance));
         }
 
         private void btnBack_Click(object sender, EventArgs e)

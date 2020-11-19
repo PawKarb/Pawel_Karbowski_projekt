@@ -110,6 +110,7 @@
             this.btnClear.TabIndex = 7;
             this.btnClear.Text = "Usuń Wszystkie";
             this.btnClear.UseVisualStyleBackColor = true;
+            this.btnClear.Click += new System.EventHandler(this.btnClear_Click);
             // 
             // btnDelete
             // 
@@ -120,6 +121,7 @@
             this.btnDelete.TabIndex = 8;
             this.btnDelete.Text = "Usuń";
             this.btnDelete.UseVisualStyleBackColor = true;
+            this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
             // 
             // btnNotif
             // 
