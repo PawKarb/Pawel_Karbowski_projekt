@@ -12,6 +12,8 @@ namespace Pawel_Karbowski_projekt
 {
     public partial class FormEdit : Form
     {
+        private Importance importance;
+        private Note noteEdit;
 
         public FormEdit()
         {

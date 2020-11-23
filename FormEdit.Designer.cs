@@ -40,6 +40,7 @@
             this.btnBack = new System.Windows.Forms.Button();
             this.btnFontChange = new System.Windows.Forms.Button();
             this.btnColorChange = new System.Windows.Forms.Button();
+            this.notificationCheckBox = new System.Windows.Forms.CheckBox();
             this.SuspendLayout();
             // 
             // label4
@@ -120,7 +121,7 @@
             // btnSaveNote
             // 
             this.btnSaveNote.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.btnSaveNote.Location = new System.Drawing.Point(12, 555);
+            this.btnSaveNote.Location = new System.Drawing.Point(12, 589);
             this.btnSaveNote.Name = "btnSaveNote";
             this.btnSaveNote.Size = new System.Drawing.Size(160, 60);
             this.btnSaveNote.TabIndex = 16;
@@ -130,7 +131,7 @@
             // btnBack
             // 
             this.btnBack.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.btnBack.Location = new System.Drawing.Point(212, 555);
+            this.btnBack.Location = new System.Drawing.Point(212, 589);
             this.btnBack.Name = "btnBack";
             this.btnBack.Size = new System.Drawing.Size(160, 60);
             this.btnBack.TabIndex = 17;
@@ -160,11 +161,25 @@
             this.btnColorChange.UseVisualStyleBackColor = true;
             this.btnColorChange.Click += new System.EventHandler(this.btnColorChange_Click);
             // 
+            // notificationCheckBox
+            // 
+            this.notificationCheckBox.AutoCheck = false;
+            this.notificationCheckBox.AutoSize = true;
+            this.notificationCheckBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.notificationCheckBox.Location = new System.Drawing.Point(126, 559);
+            this.notificationCheckBox.Name = "notificationCheckBox";
+            this.notificationCheckBox.Size = new System.Drawing.Size(134, 24);
+            this.notificationCheckBox.TabIndex = 20;
+            this.notificationCheckBox.Text = "Powiadomienie";
+            this.notificationCheckBox.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.notificationCheckBox.UseVisualStyleBackColor = true;
+            // 
             // FormEdit
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(384, 621);
+            this.ClientSize = new System.Drawing.Size(384, 661);
+            this.Controls.Add(this.notificationCheckBox);
             this.Controls.Add(this.btnColorChange);
             this.Controls.Add(this.btnFontChange);
             this.Controls.Add(this.btnBack);
@@ -177,8 +192,8 @@
             this.Controls.Add(this.dateTimePicker1);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.textBox1);
-            this.MaximumSize = new System.Drawing.Size(400, 660);
-            this.MinimumSize = new System.Drawing.Size(400, 660);
+            this.MaximumSize = new System.Drawing.Size(400, 700);
+            this.MinimumSize = new System.Drawing.Size(400, 700);
             this.Name = "FormEdit";
             this.Text = "FormEdit";
             this.ResumeLayout(false);
@@ -200,5 +215,6 @@
         private System.Windows.Forms.Button btnBack;
         private System.Windows.Forms.Button btnFontChange;
         private System.Windows.Forms.Button btnColorChange;
+        private System.Windows.Forms.CheckBox notificationCheckBox;
     }
 }

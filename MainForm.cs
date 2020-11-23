@@ -13,7 +13,7 @@ using System.Xml.Serialization;
 
 namespace Pawel_Karbowski_projekt
 {
-    public partial class MainForm : Form, INoteListBox, IListOfNotes
+    public partial class MainForm : Form, IListOfNotes
     {
         public List<Note> ListofNotes = new List<Note>();
         private String rootFolder;
@@ -22,6 +22,7 @@ namespace Pawel_Karbowski_projekt
         private FormEdit formEdit;
         private FormOpen formOpen;
         private FormNotification formNotification;
+        public static int iTxt, iRtf, liczbaNotatekRtf,liczbaNotatekTxt;
         public MainForm()
         {
             InitializeComponent();
@@ -81,8 +82,7 @@ namespace Pawel_Karbowski_projekt
 
         private void btnEdit_Click(object sender, EventArgs e)
         {
-            int element = NoteListBox.SelectedIndex;
-            if (element != -1)
+            if (listViewNote.SelectedItems.Count > 0)
             {
                 formEdit = new FormEdit();
                 formEdit.Show();
@@ -107,16 +107,12 @@ namespace Pawel_Karbowski_projekt
         {
             ListofNotes.Add(note);
         }
-        public void addNoteListBox()
+        private void addNoteListBox()
         {
             foreach (Note lnote in ListofNotes)
             {
-                NoteListBox.Items.Add(lnote.name);
+                AddListView(lnote);
             }
-        }
-        public void delNoteListBox()
-        {
-            throw new NotImplementedException();
         }
 
         public void delNoteList(Note note)
@@ -126,8 +122,7 @@ namespace Pawel_Karbowski_projekt
 
         private void btnDelete_Click(object sender, EventArgs e)
         {
-            int element = NoteListBox.SelectedIndex;
-            if (element != -1)
+            if (listViewNote.SelectedItems.Count > 0)
             {
                 return;
             }
@@ -138,8 +133,7 @@ namespace Pawel_Karbowski_projekt
         }
         private void btnClear_Click(object sender, EventArgs e)
         {
-            int elements = NoteListBox.Items.Count;
-            if (elements > 0)
+            if (listViewNote.Items.Count > 0)
             {
                 DialogResult dialogResult = MessageBox.Show("Czy chcesz usunąć wszystkie elementy z listy?", "Błąd!", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
                 if (dialogResult == DialogResult.No)
@@ -152,5 +146,42 @@ namespace Pawel_Karbowski_projekt
                 }
             }
         }
+        public void AddListView(Note lvnote)
+        {
+            switch (lvnote.importance)
+            {
+                case Importance.BRAK:
+                    {
+                        listViewNote.Items.Insert(0, lvnote.name);
+                        listViewNote.Items[0].ForeColor = Color.Black;
+                        break;
+                    }
+                case Importance.NAJWAZNIEJSZY:
+                    {
+                        listViewNote.Items.Insert(0, lvnote.name);
+                        listViewNote.Items[0].ForeColor = Color.Red;
+                        break;
+                    }
+                case Importance.OPCJONALNY:
+                    {
+                        listViewNote.Items.Insert(0, lvnote.name);
+                        listViewNote.Items[0].ForeColor = Color.Green;
+                        break;
+                    }
+                case Importance.PILNY:
+                    {
+                        listViewNote.Items.Insert(0, lvnote.name);
+                        listViewNote.Items[0].ForeColor = Color.Orange;
+                        break;
+                    }
+                case Importance.STANDARDOWY:
+                    {
+                        listViewNote.Items.Insert(0, lvnote.name);
+                        listViewNote.Items[0].ForeColor = Color.Blue;
+                        break;
+                    }
+            }
+        }
+
     }
 }

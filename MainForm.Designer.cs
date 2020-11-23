@@ -29,7 +29,6 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
-            this.NoteListBox = new System.Windows.Forms.ListBox();
             this.label2 = new System.Windows.Forms.Label();
             this.btnNew = new System.Windows.Forms.Button();
             this.btnOpen = new System.Windows.Forms.Button();
@@ -40,17 +39,9 @@
             this.btnNotif = new System.Windows.Forms.Button();
             this.btnExit = new System.Windows.Forms.Button();
             this.btnShow = new System.Windows.Forms.Button();
+            this.listViewNote = new System.Windows.Forms.ListView();
+            this.NoteName = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.SuspendLayout();
-            // 
-            // NoteListBox
-            // 
-            this.NoteListBox.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.NoteListBox.FormattingEnabled = true;
-            this.NoteListBox.ItemHeight = 20;
-            this.NoteListBox.Location = new System.Drawing.Point(12, 42);
-            this.NoteListBox.Name = "NoteListBox";
-            this.NoteListBox.Size = new System.Drawing.Size(230, 384);
-            this.NoteListBox.TabIndex = 0;
             // 
             // label2
             // 
@@ -156,12 +147,35 @@
             this.btnShow.UseVisualStyleBackColor = true;
             this.btnShow.Click += new System.EventHandler(this.btnShow_Click);
             // 
+            // listViewNote
+            // 
+            this.listViewNote.BackColor = System.Drawing.Color.White;
+            this.listViewNote.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.NoteName});
+            this.listViewNote.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.listViewNote.ForeColor = System.Drawing.Color.Black;
+            this.listViewNote.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
+            this.listViewNote.HideSelection = false;
+            this.listViewNote.Location = new System.Drawing.Point(12, 42);
+            this.listViewNote.MultiSelect = false;
+            this.listViewNote.Name = "listViewNote";
+            this.listViewNote.Size = new System.Drawing.Size(230, 394);
+            this.listViewNote.TabIndex = 12;
+            this.listViewNote.UseCompatibleStateImageBehavior = false;
+            this.listViewNote.View = System.Windows.Forms.View.Details;
+            // 
+            // NoteName
+            // 
+            this.NoteName.Text = "Nazwa notatki";
+            this.NoteName.Width = 226;
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ActiveCaption;
             this.ClientSize = new System.Drawing.Size(709, 476);
+            this.Controls.Add(this.listViewNote);
             this.Controls.Add(this.btnShow);
             this.Controls.Add(this.btnExit);
             this.Controls.Add(this.btnNotif);
@@ -172,7 +186,6 @@
             this.Controls.Add(this.btnOpen);
             this.Controls.Add(this.btnNew);
             this.Controls.Add(this.label2);
-            this.Controls.Add(this.NoteListBox);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximumSize = new System.Drawing.Size(725, 600);
             this.MinimumSize = new System.Drawing.Size(725, 515);
@@ -194,7 +207,8 @@
         private System.Windows.Forms.Button btnNotif;
         private System.Windows.Forms.Button btnExit;
         private System.Windows.Forms.Button btnShow;
-        public System.Windows.Forms.ListBox NoteListBox;
+        public System.Windows.Forms.ColumnHeader NoteName;
+        public System.Windows.Forms.ListView listViewNote;
     }
 }
 

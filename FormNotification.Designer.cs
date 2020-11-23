@@ -29,7 +29,6 @@
         private void InitializeComponent()
         {
             this.label1 = new System.Windows.Forms.Label();
-            this.checkedListBox1 = new System.Windows.Forms.CheckedListBox();
             this.label2 = new System.Windows.Forms.Label();
             this.btnDelete = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
@@ -37,6 +36,9 @@
             this.label5 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.btnBack = new System.Windows.Forms.Button();
+            this.listViewNotif = new System.Windows.Forms.ListView();
+            this.columnName = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnDate = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.SuspendLayout();
             // 
             // label1
@@ -48,15 +50,6 @@
             this.label1.Size = new System.Drawing.Size(217, 24);
             this.label1.TabIndex = 0;
             this.label1.Text = "Najbliższe wydarzenie";
-            // 
-            // checkedListBox1
-            // 
-            this.checkedListBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.checkedListBox1.FormattingEnabled = true;
-            this.checkedListBox1.Location = new System.Drawing.Point(12, 157);
-            this.checkedListBox1.Name = "checkedListBox1";
-            this.checkedListBox1.Size = new System.Drawing.Size(430, 361);
-            this.checkedListBox1.TabIndex = 2;
             // 
             // label2
             // 
@@ -132,11 +125,38 @@
             this.btnBack.UseVisualStyleBackColor = true;
             this.btnBack.Click += new System.EventHandler(this.btnBack_Click);
             // 
+            // listViewNotif
+            // 
+            this.listViewNotif.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.columnName,
+            this.columnDate});
+            this.listViewNotif.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.listViewNotif.HeaderStyle = System.Windows.Forms.ColumnHeaderStyle.Nonclickable;
+            this.listViewNotif.HideSelection = false;
+            this.listViewNotif.Location = new System.Drawing.Point(12, 161);
+            this.listViewNotif.Name = "listViewNotif";
+            this.listViewNotif.Size = new System.Drawing.Size(430, 372);
+            this.listViewNotif.TabIndex = 23;
+            this.listViewNotif.UseCompatibleStateImageBehavior = false;
+            this.listViewNotif.View = System.Windows.Forms.View.Details;
+            // 
+            // columnName
+            // 
+            this.columnName.Text = "Nazwa";
+            this.columnName.Width = 145;
+            // 
+            // columnDate
+            // 
+            this.columnDate.Text = "Data";
+            this.columnDate.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.columnDate.Width = 281;
+            // 
             // FormNotification
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(454, 611);
+            this.Controls.Add(this.listViewNotif);
             this.Controls.Add(this.btnBack);
             this.Controls.Add(this.label6);
             this.Controls.Add(this.label5);
@@ -144,12 +164,11 @@
             this.Controls.Add(this.label3);
             this.Controls.Add(this.btnDelete);
             this.Controls.Add(this.label2);
-            this.Controls.Add(this.checkedListBox1);
             this.Controls.Add(this.label1);
             this.MaximumSize = new System.Drawing.Size(470, 650);
             this.MinimumSize = new System.Drawing.Size(470, 630);
             this.Name = "FormNotification";
-            this.Text = "FormNotification";
+            this.Text = "Powiadomienia";
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -158,7 +177,6 @@
         #endregion
 
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.CheckedListBox checkedListBox1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Button btnDelete;
         private System.Windows.Forms.Label label3;
@@ -166,5 +184,8 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Button btnBack;
+        private System.Windows.Forms.ListView listViewNotif;
+        private System.Windows.Forms.ColumnHeader columnName;
+        private System.Windows.Forms.ColumnHeader columnDate;
     }
 }

@@ -22,7 +22,7 @@ namespace Pawel_Karbowski_projekt
         private Boolean powiadomienie = false;
         private String rootFolder = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "Notatki_projekt");
         private MainForm mainForm;
-        private Note notatka;
+        private Note noteCreate;
         public FormCreateNote(MainForm mForm)
         {
             InitializeComponent();
@@ -32,33 +32,87 @@ namespace Pawel_Karbowski_projekt
             comboBoxExt.Items.Add("plik sformatowany (.rtf)");
             mainForm = mForm;
         }
-        private void createNote() {
+        private void createNote()
+        {
             String cfgFile = rootFolder + "\\noteConfig.xml";
-            notatka = new Note(nazwaNotatki, dataNotatki, importance, tekstNotatki, powiadomienie);
-            mainForm.saveNoteList(notatka);
+            noteCreate = new Note(nazwaNotatki, dataNotatki, importance, tekstNotatki, powiadomienie);
+            mainForm.saveNoteList(noteCreate);
             TextWriter writeFileCfg = new StreamWriter(cfgFile);
             XmlSerializer serializer = new XmlSerializer(typeof(List<Note>), new XmlRootAttribute("Notes"));
             serializer.Serialize(writeFileCfg, mainForm.ListofNotes);
             writeFileCfg.Close();
-            mainForm.NoteListBox.Items.Insert(0, notatka.name);
+            mainForm.AddListView(noteCreate);
         }
         private void saveFile() {
             String filePath = "";
             if (comboBoxExt.SelectedIndex == 0)
             {
                 filePath = rootFolder + "\\" + nazwaNotatki + ".txt";
-                StreamWriter createLocalFile = new StreamWriter(filePath);
-                createLocalFile.WriteLine("Ważność notatki: " + importance, Encoding.UTF8);
-                createLocalFile.WriteLine(dataNotatki, Encoding.UTF8);
-                createLocalFile.Write(tekstNotatki, Encoding.UTF8);
-                createLocalFile.Close();
-                createNote();
+                if (!File.Exists(filePath))
+                {
+                    StreamWriter createLocalFile = new StreamWriter(filePath);
+                    createLocalFile.WriteLine("Ważność notatki: " + importance, Encoding.UTF8);
+                    createLocalFile.WriteLine(dataNotatki, Encoding.UTF8);
+                    createLocalFile.Write(tekstNotatki, Encoding.UTF8);
+                    createLocalFile.Close();
+                    createNote();
+                }
+                else {                   
+                    DialogResult dialogResult = MessageBox.Show("Notatka o podanej nazwie już istnieje. Chcesz ją utworzyć?", "", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                    if (dialogResult == DialogResult.No)
+                    {
+                        return;
+                    }
+                    else
+                    {
+                        while (File.Exists(filePath))
+                        {
+                            if (MainForm.iTxt != 0 && MainForm.liczbaNotatekTxt == 0)
+                                nazwaNotatki = nazwaNotatki.Remove(nazwaNotatki.Length - 1);
+                            nazwaNotatki += MainForm.iTxt;
+                            filePath = rootFolder + "\\" + nazwaNotatki + ".txt";
+                            MainForm.iTxt++;
+                        }
+                        StreamWriter createLocalFile = new StreamWriter(filePath);
+                        createLocalFile.WriteLine("Ważność notatki: " + importance, Encoding.UTF8);
+                        createLocalFile.WriteLine(dataNotatki, Encoding.UTF8);
+                        createLocalFile.Write(tekstNotatki, Encoding.UTF8);
+                        createLocalFile.Close();
+                        MainForm.liczbaNotatekTxt++;
+                        createNote();
+                    }
+                }
             }
             else if (comboBoxExt.SelectedIndex == 1)
             {
                 filePath = rootFolder + "\\" + nazwaNotatki + ".rtf";
-                richTextNote.SaveFile(filePath, RichTextBoxStreamType.RichText);
-                createNote();
+                if (!File.Exists(filePath))
+                {
+                    richTextNote.SaveFile(filePath, RichTextBoxStreamType.RichText);
+                    createNote();
+                }
+                else
+                {
+                    DialogResult dialogResult = MessageBox.Show("Notatka o podanej nazwie już istnieje. Chcesz ją utworzyć?", "", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                    if (dialogResult == DialogResult.No)
+                    {
+                        return;
+                    }
+                    else
+                    {
+                        while (File.Exists(filePath))
+                        {
+                            if (MainForm.iRtf != 0 && MainForm.liczbaNotatekRtf == 0)
+                                nazwaNotatki = nazwaNotatki.Remove(nazwaNotatki.Length - 1);
+                            nazwaNotatki += MainForm.iRtf;
+                            filePath = rootFolder + "\\" + nazwaNotatki + ".rtf";
+                            MainForm.iRtf++;
+                        }
+                        richTextNote.SaveFile(filePath, RichTextBoxStreamType.RichText);
+                        MainForm.liczbaNotatekRtf++;
+                        createNote();
+                    }
+                }
             }
             else 
             {
