@@ -5,6 +5,7 @@ using System.Data;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -13,7 +14,7 @@ using System.Xml.Serialization;
 
 namespace Pawel_Karbowski_projekt
 {
-    public partial class MainForm : Form, IListOfNotes
+    public partial class MainForm : Form, IListOfNotes,ISerializer
     {
         public List<Note> ListofNotes = new List<Note>();
         private String rootFolder;
@@ -39,11 +40,8 @@ namespace Pawel_Karbowski_projekt
             }
             else if (new FileInfo(cfgFile).Length != 0)
             {
-                Stream xmlReader = new FileStream(cfgFile, FileMode.Open);
-                XmlSerializer serializer = new XmlSerializer(typeof(List<Note>), new XmlRootAttribute("Notes"));
-                ListofNotes = (List<Note>)serializer.Deserialize(xmlReader);
-                addNoteListBox();
-                xmlReader.Close();
+                ListDeserializer();
+                addNoteListView();
             }
 
         }
@@ -107,7 +105,7 @@ namespace Pawel_Karbowski_projekt
         {
             ListofNotes.Add(note);
         }
-        private void addNoteListBox()
+        private void addNoteListView()
         {
             foreach (Note lnote in ListofNotes)
             {
@@ -117,14 +115,35 @@ namespace Pawel_Karbowski_projekt
 
         public void delNoteList(Note note)
         {
-            throw new NotImplementedException();
+            ListofNotes.Remove(note);
         }
 
         private void btnDelete_Click(object sender, EventArgs e)
         {
             if (listViewNote.SelectedItems.Count > 0)
             {
-                return;
+                DialogResult dialogResult = MessageBox.Show("Czy chcesz usunąć tą notatkę?", "", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                if (dialogResult == DialogResult.Yes)
+                {
+
+                    String n = listViewNote.SelectedItems[0].Text;
+                    Extension ext = (Extension)Enum.Parse(typeof(Extension), listViewNote.SelectedItems[0].SubItems[1].Text);
+                    foreach (Note lnote in ListofNotes)
+                    {
+                        if (lnote.name.Equals(n) && lnote.extension.Equals(ext))
+                        {
+                            delNoteList(lnote);
+                            break;
+                        }
+                    }
+                    listViewNote.SelectedItems[0].Remove();
+                    File.Delete(rootFolder + "\\" + n + "." + ext.ToString());
+                    ListSerializer();
+                }
+                else
+                {
+                    return;
+                }
             }
             else
             {
@@ -136,9 +155,17 @@ namespace Pawel_Karbowski_projekt
             if (listViewNote.Items.Count > 0)
             {
                 DialogResult dialogResult = MessageBox.Show("Czy chcesz usunąć wszystkie elementy z listy?", "Błąd!", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
-                if (dialogResult == DialogResult.No)
+                if (dialogResult == DialogResult.Yes)
                 {
-                    return;
+                    string[] filePaths = Directory.GetFiles(rootFolder);
+                    foreach (string filePath in filePaths)
+                    {
+                        if(!filePath.Equals(cfgFile))
+                            File.Delete(filePath);
+                    }
+                    ListofNotes.Clear();
+                    listViewNote.Items.Clear();
+                    ListSerializer();
                 }
                 else
                 {
@@ -148,40 +175,56 @@ namespace Pawel_Karbowski_projekt
         }
         public void AddListView(Note lvnote)
         {
+            var item = new ListViewItem(new[] { lvnote.name,  lvnote.extension.ToString()});
             switch (lvnote.importance)
             {
                 case Importance.BRAK:
                     {
-                        listViewNote.Items.Insert(0, lvnote.name);
+                        listViewNote.Items.Add(item);
                         listViewNote.Items[0].ForeColor = Color.Black;
                         break;
                     }
                 case Importance.NAJWAZNIEJSZY:
                     {
-                        listViewNote.Items.Insert(0, lvnote.name);
+                        listViewNote.Items.Add(item);
                         listViewNote.Items[0].ForeColor = Color.Red;
                         break;
                     }
                 case Importance.OPCJONALNY:
                     {
-                        listViewNote.Items.Insert(0, lvnote.name);
+                        listViewNote.Items.Add(item);
                         listViewNote.Items[0].ForeColor = Color.Green;
                         break;
                     }
                 case Importance.PILNY:
                     {
-                        listViewNote.Items.Insert(0, lvnote.name);
+                        listViewNote.Items.Add(item);
                         listViewNote.Items[0].ForeColor = Color.Orange;
                         break;
                     }
                 case Importance.STANDARDOWY:
                     {
-                        listViewNote.Items.Insert(0, lvnote.name);
+                        listViewNote.Items.Add(item);
                         listViewNote.Items[0].ForeColor = Color.Blue;
                         break;
                     }
             }
         }
 
+        public void ListSerializer()
+        {
+            TextWriter writeFileCfg = new StreamWriter(cfgFile);
+            XmlSerializer serializer = new XmlSerializer(typeof(List<Note>), new XmlRootAttribute("Notes"));
+            serializer.Serialize(writeFileCfg, ListofNotes);
+            writeFileCfg.Close();
+        }
+
+        public void ListDeserializer()
+        {
+            Stream xmlReader = new FileStream(cfgFile, FileMode.Open);
+            XmlSerializer serializer = new XmlSerializer(typeof(List<Note>), new XmlRootAttribute("Notes"));
+            ListofNotes = (List<Note>)serializer.Deserialize(xmlReader);
+            xmlReader.Close();
+        }
     }
 }

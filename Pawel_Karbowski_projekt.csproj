@@ -61,6 +61,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ExtensionEnum.cs" />
     <Compile Include="FormEdit.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -80,6 +81,7 @@
       <DependentUpon>FormOpen.cs</DependentUpon>
     </Compile>
     <Compile Include="IListOfNotes.cs" />
+    <Compile Include="ISerializer.cs" />
     <Compile Include="MainForm.cs">
       <SubType>Form</SubType>
     </Compile>

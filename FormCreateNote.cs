@@ -18,6 +18,7 @@ namespace Pawel_Karbowski_projekt
         private String nazwaNotatki;
         private String dataNotatki;
         private Importance importance;
+        private Extension extension;
         private String tekstNotatki;
         private Boolean powiadomienie = false;
         private String rootFolder = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "Notatki_projekt");
@@ -35,18 +36,16 @@ namespace Pawel_Karbowski_projekt
         private void createNote()
         {
             String cfgFile = rootFolder + "\\noteConfig.xml";
-            noteCreate = new Note(nazwaNotatki, dataNotatki, importance, tekstNotatki, powiadomienie);
+            noteCreate = new Note(nazwaNotatki, dataNotatki, importance, extension, tekstNotatki, powiadomienie);
             mainForm.saveNoteList(noteCreate);
-            TextWriter writeFileCfg = new StreamWriter(cfgFile);
-            XmlSerializer serializer = new XmlSerializer(typeof(List<Note>), new XmlRootAttribute("Notes"));
-            serializer.Serialize(writeFileCfg, mainForm.ListofNotes);
-            writeFileCfg.Close();
+            mainForm.ListSerializer();
             mainForm.AddListView(noteCreate);
         }
         private void saveFile() {
             String filePath = "";
             if (comboBoxExt.SelectedIndex == 0)
             {
+                extension = Extension.TXT;
                 filePath = rootFolder + "\\" + nazwaNotatki + ".txt";
                 if (!File.Exists(filePath))
                 {
@@ -85,6 +84,7 @@ namespace Pawel_Karbowski_projekt
             }
             else if (comboBoxExt.SelectedIndex == 1)
             {
+                extension = Extension.RTF;
                 filePath = rootFolder + "\\" + nazwaNotatki + ".rtf";
                 if (!File.Exists(filePath))
                 {

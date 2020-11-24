@@ -135,6 +135,7 @@
             this.listViewNotif.HideSelection = false;
             this.listViewNotif.Location = new System.Drawing.Point(12, 161);
             this.listViewNotif.Name = "listViewNotif";
+            this.listViewNotif.Scrollable = false;
             this.listViewNotif.Size = new System.Drawing.Size(430, 372);
             this.listViewNotif.TabIndex = 23;
             this.listViewNotif.UseCompatibleStateImageBehavior = false;
@@ -149,7 +150,7 @@
             // 
             this.columnDate.Text = "Data";
             this.columnDate.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.columnDate.Width = 281;
+            this.columnDate.Width = 284;
             // 
             // FormNotification
             // 
@@ -184,8 +185,8 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Button btnBack;
-        private System.Windows.Forms.ListView listViewNotif;
         private System.Windows.Forms.ColumnHeader columnName;
         private System.Windows.Forms.ColumnHeader columnDate;
+        public System.Windows.Forms.ListView listViewNotif;
     }
 }
