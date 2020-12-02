@@ -17,17 +17,16 @@ namespace Pawel_Karbowski_projekt
     public partial class MainForm : Form, IListOfNotes,ISerializer
     {
         public List<Note> ListofNotes = new List<Note>();
-        private String rootFolder;
+        public static String rootFolder = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "Notatki_projekt");
         private String cfgFile;
         private FormCreateNote createNote;
         private FormEdit formEdit;
         private FormOpen formOpen;
         private FormNotification formNotification;
-        public static int iTxt, iRtf, liczbaNotatekRtf,liczbaNotatekTxt;
+        public static int iTxt, iRtf,numNotesRtf,numNotesTxt;
         public MainForm()
         {
             InitializeComponent();
-            rootFolder = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "Notatki_projekt");
             cfgFile = rootFolder + "\\noteConfig.xml";
             if (!Directory.Exists(rootFolder))
             {
@@ -101,22 +100,6 @@ namespace Pawel_Karbowski_projekt
         {
             System.Diagnostics.Process.Start(rootFolder);
         }
-        public void saveNoteList(Note note)
-        {
-            ListofNotes.Add(note);
-        }
-        private void addNoteListView()
-        {
-            foreach (Note lnote in ListofNotes)
-            {
-                AddListView(lnote);
-            }
-        }
-
-        public void delNoteList(Note note)
-        {
-            ListofNotes.Remove(note);
-        }
 
         private void btnDelete_Click(object sender, EventArgs e)
         {
@@ -130,7 +113,7 @@ namespace Pawel_Karbowski_projekt
                     Extension ext = (Extension)Enum.Parse(typeof(Extension), listViewNote.SelectedItems[0].SubItems[1].Text);
                     foreach (Note lnote in ListofNotes)
                     {
-                        if (lnote.name.Equals(n) && lnote.extension.Equals(ext))
+                        if (lnote.Name.Equals(n) && lnote.extension.Equals(ext))
                         {
                             delNoteList(lnote);
                             break;
@@ -175,7 +158,7 @@ namespace Pawel_Karbowski_projekt
         }
         public void AddListView(Note lvnote)
         {
-            var item = new ListViewItem(new[] { lvnote.name,  lvnote.extension.ToString()});
+            var item = new ListViewItem(new[] { lvnote.Name,  lvnote.extension.ToString()});
             switch (lvnote.importance)
             {
                 case Importance.BRAK:
@@ -226,5 +209,21 @@ namespace Pawel_Karbowski_projekt
             ListofNotes = (List<Note>)serializer.Deserialize(xmlReader);
             xmlReader.Close();
         }
+        public void saveNoteList(Note note)
+        {
+            ListofNotes.Add(note);
+        }
+        private void addNoteListView()
+        {
+            foreach (Note lnote in ListofNotes)
+            {
+                AddListView(lnote);
+            }
+        }
+        public void delNoteList(Note note)
+        {
+            ListofNotes.Remove(note);
+        }
     }
+
 }

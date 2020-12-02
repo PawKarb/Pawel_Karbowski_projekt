@@ -14,8 +14,7 @@ namespace Pawel_Karbowski_projekt
     public partial class FormOpen : Form
     {
         private OpenFileDialog openFileDialog;
-        private string fileExt = "";
-        private string rootFolder = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "Notatki_projekt");
+        private String fileExt = "";
         public FormOpen()
         {
             InitializeComponent();
@@ -25,7 +24,7 @@ namespace Pawel_Karbowski_projekt
         private void OpenFile() {
             openFileDialog = new OpenFileDialog();
             string fileText = "";
-            openFileDialog.InitialDirectory = rootFolder;
+            openFileDialog.InitialDirectory = MainForm.rootFolder;
             openFileDialog.Filter = "rtf files(*.rtf)|*.rtf|txt files(*.txt)|*.txt";
             openFileDialog.FilterIndex = 2;
             openFileDialog.RestoreDirectory = true;

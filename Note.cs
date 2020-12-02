@@ -8,28 +8,29 @@ namespace Pawel_Karbowski_projekt
 {
     public class Note
     {
-        public String name { get; set; }
-        public String dateNote { get; set; }
+        public String Name { get; set; }
+        public String DateNote { get; set; }
         public Importance importance { get; set; }
         public Extension extension { get; set; }
-        public String textNote { get; set; }
-        public Boolean isNotification { get; set; }
-        public Note(string nazwa, string data, Importance waznosc, Extension rozszerzenie, string tekst, bool powiadomienie)
-        {
-            name = nazwa;
-            dateNote = data;
-            importance = waznosc;
-            extension = rozszerzenie;
-            textNote = tekst;
-            isNotification = powiadomienie;
-        }
+        public String TextNote { get; set; }
+        public Boolean IsNotification { get; set; }
+
         public Note() { 
         }
-        public override string ToString()
+
+        public Note(string name, string dateNote, Importance importance, Extension extension, string textNote, bool isNotification)
         {
-            return name + ", " + dateNote + ", " + importance + ", " + textNote +", "+ isNotification;
+            Name = name;
+            DateNote = dateNote;
+            this.importance = importance;
+            this.extension = extension;
+            TextNote = textNote;
+            IsNotification = isNotification;
         }
 
-
+        public override string ToString()
+        {
+            return Name + ", " + DateNote + ", " + this.importance + ", " + this.extension + ", " + TextNote + ", " + IsNotification; 
+        }
     }
 }

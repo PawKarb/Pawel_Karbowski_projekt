@@ -15,13 +15,13 @@ namespace Pawel_Karbowski_projekt
 {
     public partial class FormCreateNote : Form
     {
-        private String nazwaNotatki;
-        private String dataNotatki;
+        private String nameOfCNote;
+        private String dateOfCNote;
         private Importance importance;
         private Extension extension;
-        private String tekstNotatki;
-        private Boolean powiadomienie = false;
-        private String rootFolder = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "Notatki_projekt");
+        private String textOfCNote;
+        private Boolean isNotifiactionCNote = false;
+        private String mainFolder = MainForm.rootFolder;
         private MainForm mainForm;
         private Note noteCreate;
         public FormCreateNote(MainForm mForm)
@@ -35,8 +35,8 @@ namespace Pawel_Karbowski_projekt
         }
         private void createNote()
         {
-            String cfgFile = rootFolder + "\\noteConfig.xml";
-            noteCreate = new Note(nazwaNotatki, dataNotatki, importance, extension, tekstNotatki, powiadomienie);
+            String cfgFile = mainFolder + "\\noteConfig.xml";
+            noteCreate = new Note(nameOfCNote, dateOfCNote, importance, extension, textOfCNote, isNotifiactionCNote);
             mainForm.saveNoteList(noteCreate);
             mainForm.ListSerializer();
             mainForm.AddListView(noteCreate);
@@ -46,13 +46,13 @@ namespace Pawel_Karbowski_projekt
             if (comboBoxExt.SelectedIndex == 0)
             {
                 extension = Extension.TXT;
-                filePath = rootFolder + "\\" + nazwaNotatki + ".txt";
+                filePath = mainFolder + "\\" + nameOfCNote + ".txt";
                 if (!File.Exists(filePath))
                 {
                     StreamWriter createLocalFile = new StreamWriter(filePath);
                     createLocalFile.WriteLine("Ważność notatki: " + importance, Encoding.UTF8);
-                    createLocalFile.WriteLine(dataNotatki, Encoding.UTF8);
-                    createLocalFile.Write(tekstNotatki, Encoding.UTF8);
+                    createLocalFile.WriteLine(dateOfCNote, Encoding.UTF8);
+                    createLocalFile.Write(nameOfCNote, Encoding.UTF8);
                     createLocalFile.Close();
                     createNote();
                 }
@@ -66,18 +66,18 @@ namespace Pawel_Karbowski_projekt
                     {
                         while (File.Exists(filePath))
                         {
-                            if (MainForm.iTxt != 0 && MainForm.liczbaNotatekTxt == 0)
-                                nazwaNotatki = nazwaNotatki.Remove(nazwaNotatki.Length - 1);
-                            nazwaNotatki += MainForm.iTxt;
-                            filePath = rootFolder + "\\" + nazwaNotatki + ".txt";
+                            if (MainForm.iTxt != 0 && MainForm.numNotesTxt == 0)
+                                nameOfCNote = nameOfCNote.Remove(nameOfCNote.Length - 1);
+                            nameOfCNote += MainForm.iTxt;
+                            filePath = mainFolder + "\\" + nameOfCNote + ".txt";
                             MainForm.iTxt++;
                         }
                         StreamWriter createLocalFile = new StreamWriter(filePath);
                         createLocalFile.WriteLine("Ważność notatki: " + importance, Encoding.UTF8);
-                        createLocalFile.WriteLine(dataNotatki, Encoding.UTF8);
-                        createLocalFile.Write(tekstNotatki, Encoding.UTF8);
+                        createLocalFile.WriteLine(dateOfCNote, Encoding.UTF8);
+                        createLocalFile.Write(textOfCNote, Encoding.UTF8);
                         createLocalFile.Close();
-                        MainForm.liczbaNotatekTxt++;
+                        MainForm.numNotesTxt++;
                         createNote();
                     }
                 }
@@ -85,7 +85,7 @@ namespace Pawel_Karbowski_projekt
             else if (comboBoxExt.SelectedIndex == 1)
             {
                 extension = Extension.RTF;
-                filePath = rootFolder + "\\" + nazwaNotatki + ".rtf";
+                filePath = mainFolder + "\\" + nameOfCNote + ".rtf";
                 if (!File.Exists(filePath))
                 {
                     richTextNote.SaveFile(filePath, RichTextBoxStreamType.RichText);
@@ -102,14 +102,14 @@ namespace Pawel_Karbowski_projekt
                     {
                         while (File.Exists(filePath))
                         {
-                            if (MainForm.iRtf != 0 && MainForm.liczbaNotatekRtf == 0)
-                                nazwaNotatki = nazwaNotatki.Remove(nazwaNotatki.Length - 1);
-                            nazwaNotatki += MainForm.iRtf;
-                            filePath = rootFolder + "\\" + nazwaNotatki + ".rtf";
+                            if (MainForm.iRtf != 0 && MainForm.numNotesRtf == 0)
+                                nameOfCNote = nameOfCNote.Remove(nameOfCNote.Length - 1);
+                            nameOfCNote += MainForm.iRtf;
+                            filePath = mainFolder + "\\" + nameOfCNote + ".rtf";
                             MainForm.iRtf++;
                         }
                         richTextNote.SaveFile(filePath, RichTextBoxStreamType.RichText);
-                        MainForm.liczbaNotatekRtf++;
+                        MainForm.numNotesRtf++;
                         createNote();
                     }
                 }
@@ -133,11 +133,11 @@ namespace Pawel_Karbowski_projekt
         }
         private void btnCreateNote_Click(object sender, EventArgs e)
         {
-            nazwaNotatki = textBoxName.Text;
-            dataNotatki = datePickerNote.Value.ToShortDateString();
+            nameOfCNote = textBoxName.Text;
+            dateOfCNote = datePickerNote.Value.ToShortDateString();
             importance = (Importance)Enum.Parse(typeof(Importance), ComboBoxImportance.Text);
-            tekstNotatki = richTextNote.Text;
-            powiadomienie = notificationCheckBox.Checked;
+            textOfCNote = richTextNote.Text;
+            isNotifiactionCNote = notificationCheckBox.Checked;
             saveFile();
         }
 
