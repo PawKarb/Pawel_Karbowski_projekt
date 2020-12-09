@@ -50,8 +50,6 @@ namespace Pawel_Karbowski_projekt
                 if (!File.Exists(filePath))
                 {
                     StreamWriter createLocalFile = new StreamWriter(filePath);
-                    createLocalFile.WriteLine("Ważność notatki: " + importance, Encoding.UTF8);
-                    createLocalFile.WriteLine(dateOfCNote, Encoding.UTF8);
                     createLocalFile.Write(nameOfCNote, Encoding.UTF8);
                     createLocalFile.Close();
                     createNote();
@@ -73,8 +71,6 @@ namespace Pawel_Karbowski_projekt
                             MainForm.iTxt++;
                         }
                         StreamWriter createLocalFile = new StreamWriter(filePath);
-                        createLocalFile.WriteLine("Ważność notatki: " + importance, Encoding.UTF8);
-                        createLocalFile.WriteLine(dateOfCNote, Encoding.UTF8);
                         createLocalFile.Write(textOfCNote, Encoding.UTF8);
                         createLocalFile.Close();
                         MainForm.numNotesTxt++;
@@ -156,9 +152,9 @@ namespace Pawel_Karbowski_projekt
 
         private void btnFontChange_Click(object sender, EventArgs e)
         {
-            ColorDialog colorDialog = new ColorDialog();
-            colorDialog.ShowDialog();
-            richTextNote.SelectionColor = colorDialog.Color;
+            FontDialog fontDialog = new FontDialog();
+            fontDialog.ShowDialog();
+            richTextNote.SelectionFont = fontDialog.Font;
         }
 
         private void btnColorChange_Click(object sender, EventArgs e)

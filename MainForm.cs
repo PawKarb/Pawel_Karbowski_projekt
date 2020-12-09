@@ -24,9 +24,11 @@ namespace Pawel_Karbowski_projekt
         private FormOpen formOpen;
         private FormNotification formNotification;
         public static int iTxt, iRtf,numNotesRtf,numNotesTxt;
+        private int numberOfNotes = 0;
         public MainForm()
         {
             InitializeComponent();
+            listBoxImportance.DataSource = Enum.GetValues(typeof(Importance));
             cfgFile = rootFolder + "\\noteConfig.xml";
             if (!Directory.Exists(rootFolder))
             {
@@ -81,8 +83,25 @@ namespace Pawel_Karbowski_projekt
         {
             if (listViewNote.SelectedItems.Count > 0)
             {
-                formEdit = new FormEdit();
-                formEdit.Show();
+                String n = listViewNote.SelectedItems[0].Text;
+                Extension ext = (Extension)Enum.Parse(typeof(Extension), listViewNote.SelectedItems[0].SubItems[1].Text);
+                String fileNameEdit = rootFolder + "\\" + n + "." + ext;
+                if (File.Exists(fileNameEdit))
+                {
+                    var itemEdit = listViewNote.SelectedItems[0];
+                    foreach (Note lnote in ListofNotes)
+                    {
+                        if (lnote.Name.Equals(n) && lnote.extension.Equals(ext))
+                        {
+                            formEdit = new FormEdit(lnote, this, itemEdit);
+                            break;
+                        }
+                    }
+                    formEdit.Show();
+                }
+                else {
+                    MessageBox.Show("Plik nie istnieje!", "Błąd!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
             }
             else
             {
@@ -108,7 +127,7 @@ namespace Pawel_Karbowski_projekt
                 DialogResult dialogResult = MessageBox.Show("Czy chcesz usunąć tą notatkę?", "", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
                 if (dialogResult == DialogResult.Yes)
                 {
-
+                    var item = listViewNote.SelectedItems[0];
                     String n = listViewNote.SelectedItems[0].Text;
                     Extension ext = (Extension)Enum.Parse(typeof(Extension), listViewNote.SelectedItems[0].SubItems[1].Text);
                     foreach (Note lnote in ListofNotes)
@@ -119,7 +138,7 @@ namespace Pawel_Karbowski_projekt
                             break;
                         }
                     }
-                    listViewNote.SelectedItems[0].Remove();
+                    RemoveListView(item);
                     File.Delete(rootFolder + "\\" + n + "." + ext.ToString());
                     ListSerializer();
                 }
@@ -149,6 +168,7 @@ namespace Pawel_Karbowski_projekt
                     ListofNotes.Clear();
                     listViewNote.Items.Clear();
                     ListSerializer();
+                    numberOfNotes = 0;
                 }
                 else
                 {
@@ -164,36 +184,39 @@ namespace Pawel_Karbowski_projekt
                 case Importance.BRAK:
                     {
                         listViewNote.Items.Add(item);
-                        listViewNote.Items[0].ForeColor = Color.Black;
+                        listViewNote.Items[numberOfNotes].ForeColor = Color.Black;
                         break;
                     }
                 case Importance.NAJWAZNIEJSZY:
                     {
                         listViewNote.Items.Add(item);
-                        listViewNote.Items[0].ForeColor = Color.Red;
+                        listViewNote.Items[numberOfNotes].ForeColor = Color.Red;
                         break;
                     }
                 case Importance.OPCJONALNY:
                     {
                         listViewNote.Items.Add(item);
-                        listViewNote.Items[0].ForeColor = Color.Green;
+                        listViewNote.Items[numberOfNotes].ForeColor = Color.Green;
                         break;
                     }
                 case Importance.PILNY:
                     {
                         listViewNote.Items.Add(item);
-                        listViewNote.Items[0].ForeColor = Color.Orange;
+                        listViewNote.Items[numberOfNotes].ForeColor = Color.Orange;
                         break;
                     }
                 case Importance.STANDARDOWY:
                     {
                         listViewNote.Items.Add(item);
-                        listViewNote.Items[0].ForeColor = Color.Blue;
+                        listViewNote.Items[numberOfNotes].ForeColor = Color.Blue;
                         break;
                     }
             }
+            numberOfNotes++;
         }
-
+        public void RemoveListView(ListViewItem listViewItem) {
+            listViewItem.Remove();
+        }
         public void ListSerializer()
         {
             TextWriter writeFileCfg = new StreamWriter(cfgFile);
@@ -209,6 +232,7 @@ namespace Pawel_Karbowski_projekt
             ListofNotes = (List<Note>)serializer.Deserialize(xmlReader);
             xmlReader.Close();
         }
+
         public void saveNoteList(Note note)
         {
             ListofNotes.Add(note);
@@ -223,6 +247,7 @@ namespace Pawel_Karbowski_projekt
         public void delNoteList(Note note)
         {
             ListofNotes.Remove(note);
+            numberOfNotes--;
         }
     }
 

@@ -28,19 +28,20 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormEdit));
             this.label4 = new System.Windows.Forms.Label();
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
             this.comboBoxImportance = new System.Windows.Forms.ComboBox();
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
+            this.dateTimePickerENote = new System.Windows.Forms.DateTimePicker();
             this.label1 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
             this.btnSaveNote = new System.Windows.Forms.Button();
             this.btnBack = new System.Windows.Forms.Button();
             this.btnFontChange = new System.Windows.Forms.Button();
             this.btnColorChange = new System.Windows.Forms.Button();
             this.notificationCheckBox = new System.Windows.Forms.CheckBox();
+            this.textBoxEName = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // label4
@@ -93,12 +94,12 @@
             this.label2.TabIndex = 11;
             this.label2.Text = "Data";
             // 
-            // dateTimePicker1
+            // dateTimePickerENote
             // 
-            this.dateTimePicker1.Location = new System.Drawing.Point(85, 81);
-            this.dateTimePicker1.Name = "dateTimePicker1";
-            this.dateTimePicker1.Size = new System.Drawing.Size(214, 20);
-            this.dateTimePicker1.TabIndex = 10;
+            this.dateTimePickerENote.Location = new System.Drawing.Point(85, 81);
+            this.dateTimePickerENote.Name = "dateTimePickerENote";
+            this.dateTimePickerENote.Size = new System.Drawing.Size(214, 20);
+            this.dateTimePickerENote.TabIndex = 10;
             // 
             // label1
             // 
@@ -111,13 +112,6 @@
             this.label1.TabIndex = 9;
             this.label1.Text = "Nazwa";
             // 
-            // textBox1
-            // 
-            this.textBox1.Location = new System.Drawing.Point(85, 35);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(214, 20);
-            this.textBox1.TabIndex = 8;
-            // 
             // btnSaveNote
             // 
             this.btnSaveNote.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
@@ -127,6 +121,7 @@
             this.btnSaveNote.TabIndex = 16;
             this.btnSaveNote.Text = "Zapisz";
             this.btnSaveNote.UseVisualStyleBackColor = true;
+            this.btnSaveNote.Click += new System.EventHandler(this.btnSaveNote_Click);
             // 
             // btnBack
             // 
@@ -174,6 +169,14 @@
             this.notificationCheckBox.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.notificationCheckBox.UseVisualStyleBackColor = true;
             // 
+            // textBoxEName
+            // 
+            this.textBoxEName.Location = new System.Drawing.Point(85, 35);
+            this.textBoxEName.Name = "textBoxEName";
+            this.textBoxEName.ReadOnly = true;
+            this.textBoxEName.Size = new System.Drawing.Size(214, 20);
+            this.textBoxEName.TabIndex = 8;
+            // 
             // FormEdit
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -189,9 +192,10 @@
             this.Controls.Add(this.comboBoxImportance);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
-            this.Controls.Add(this.dateTimePicker1);
+            this.Controls.Add(this.dateTimePickerENote);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.textBoxEName);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximumSize = new System.Drawing.Size(400, 700);
             this.MinimumSize = new System.Drawing.Size(400, 700);
             this.Name = "FormEdit";
@@ -208,13 +212,13 @@
         private System.Windows.Forms.ComboBox comboBoxImportance;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.DateTimePicker dateTimePicker1;
+        private System.Windows.Forms.DateTimePicker dateTimePickerENote;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.Button btnSaveNote;
         private System.Windows.Forms.Button btnBack;
         private System.Windows.Forms.Button btnFontChange;
         private System.Windows.Forms.Button btnColorChange;
         private System.Windows.Forms.CheckBox notificationCheckBox;
+        private System.Windows.Forms.TextBox textBoxEName;
     }
 }
