@@ -14,7 +14,7 @@ using System.Xml.Serialization;
 
 namespace Pawel_Karbowski_projekt
 {
-    public partial class MainForm : Form, IListOfNotes,ISerializer
+    public partial class MainForm : Form, IListOfNotes,ISerializer,IListView
     {
         public List<Note> ListofNotes = new List<Note>();
         public static String rootFolder = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "Notatki_projekt");
@@ -237,7 +237,7 @@ namespace Pawel_Karbowski_projekt
         {
             ListofNotes.Add(note);
         }
-        private void addNoteListView()
+        public void addNoteListView()
         {
             foreach (Note lnote in ListofNotes)
             {
