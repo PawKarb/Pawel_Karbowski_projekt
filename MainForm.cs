@@ -16,7 +16,8 @@ namespace Pawel_Karbowski_projekt
 {
     public partial class MainForm : Form, IListOfNotes,ISerializer,IListView
     {
-        public List<Note> ListofNotes = new List<Note>();
+        public List<Note> ListOfNotes = new List<Note>();
+        public static List<Note> listOfNotesNot = new List<Note>();
         public static String rootFolder = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "Notatki_projekt");
         private String cfgFile;
         private FormCreateNote createNote;
@@ -43,8 +44,8 @@ namespace Pawel_Karbowski_projekt
             {
                 ListDeserializer();
                 addNoteListView();
+                checkNotification();
             }
-
         }
         private void btnNew_Click(object sender, EventArgs e)
         {
@@ -89,7 +90,7 @@ namespace Pawel_Karbowski_projekt
                 if (File.Exists(fileNameEdit))
                 {
                     var itemEdit = listViewNote.SelectedItems[0];
-                    foreach (Note lnote in ListofNotes)
+                    foreach (Note lnote in ListOfNotes)
                     {
                         if (lnote.Name.Equals(n) && lnote.extension.Equals(ext))
                         {
@@ -111,8 +112,14 @@ namespace Pawel_Karbowski_projekt
 
         private void btnNotif_Click(object sender, EventArgs e)
         {
-            formNotification = new FormNotification();
-            formNotification.Show();
+            if (listOfNotesNot.Any())
+            {
+                formNotification = new FormNotification(this);
+                formNotification.Show();
+            }
+            else {
+                MessageBox.Show("Brak powiadomień!", "Błąd!", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
         }
 
         private void btnShow_Click(object sender, EventArgs e)
@@ -130,7 +137,7 @@ namespace Pawel_Karbowski_projekt
                     var item = listViewNote.SelectedItems[0];
                     String n = listViewNote.SelectedItems[0].Text;
                     Extension ext = (Extension)Enum.Parse(typeof(Extension), listViewNote.SelectedItems[0].SubItems[1].Text);
-                    foreach (Note lnote in ListofNotes)
+                    foreach (Note lnote in ListOfNotes)
                     {
                         if (lnote.Name.Equals(n) && lnote.extension.Equals(ext))
                         {
@@ -165,7 +172,7 @@ namespace Pawel_Karbowski_projekt
                         if(!filePath.Equals(cfgFile))
                             File.Delete(filePath);
                     }
-                    ListofNotes.Clear();
+                    ListOfNotes.Clear();
                     listViewNote.Items.Clear();
                     ListSerializer();
                     numberOfNotes = 0;
@@ -221,7 +228,7 @@ namespace Pawel_Karbowski_projekt
         {
             TextWriter writeFileCfg = new StreamWriter(cfgFile);
             XmlSerializer serializer = new XmlSerializer(typeof(List<Note>), new XmlRootAttribute("Notes"));
-            serializer.Serialize(writeFileCfg, ListofNotes);
+            serializer.Serialize(writeFileCfg, ListOfNotes);
             writeFileCfg.Close();
         }
 
@@ -229,25 +236,53 @@ namespace Pawel_Karbowski_projekt
         {
             Stream xmlReader = new FileStream(cfgFile, FileMode.Open);
             XmlSerializer serializer = new XmlSerializer(typeof(List<Note>), new XmlRootAttribute("Notes"));
-            ListofNotes = (List<Note>)serializer.Deserialize(xmlReader);
+            ListOfNotes = (List<Note>)serializer.Deserialize(xmlReader);
+            addNoteListNotif();
             xmlReader.Close();
         }
 
         public void saveNoteList(Note note)
         {
-            ListofNotes.Add(note);
+            ListOfNotes.Add(note);
+            if (note.IsNotification) {
+                listOfNotesNot.Add(note);
+            }
         }
         public void addNoteListView()
         {
-            foreach (Note lnote in ListofNotes)
+            foreach (Note lnote in ListOfNotes)
             {
                 AddListView(lnote);
             }
         }
         public void delNoteList(Note note)
         {
-            ListofNotes.Remove(note);
+            ListOfNotes.Remove(note);
+            if (note.IsNotification)
+            {
+                listOfNotesNot.Remove(note);
+            }
             numberOfNotes--;
+        }
+        public void addNoteListNotif() {
+            foreach (Note ntNote in ListOfNotes) {
+                if (ntNote.IsNotification) {
+                    listOfNotesNot.Add(ntNote);
+                }
+            }
+            listOfNotesNot.OrderBy(x => DateTime.Parse(x.DateNote));
+        }
+        public void checkNotification() {
+            foreach (Note lnote in listOfNotesNot) {
+                if (DateTime.Parse(lnote.DateNote).Equals(DateTime.Today))
+                {
+                    MessageBox.Show("Dzisiaj jest wydarzenie: " + lnote.Name, "Powiadomienie", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                if (DateTime.Parse(lnote.DateNote).Equals(DateTime.Today.AddDays(1))) {
+                    MessageBox.Show("Jutro jest wydarzenie: " + lnote.Name, "Powiadomienie", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                
+            }
         }
     }
 
