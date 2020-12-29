@@ -173,6 +173,7 @@ namespace Pawel_Karbowski_projekt
                             File.Delete(filePath);
                     }
                     ListOfNotes.Clear();
+                    listOfNotesNot.Clear();
                     listViewNote.Items.Clear();
                     ListSerializer();
                     numberOfNotes = 0;
@@ -258,10 +259,7 @@ namespace Pawel_Karbowski_projekt
         public void delNoteList(Note note)
         {
             ListOfNotes.Remove(note);
-            if (note.IsNotification)
-            {
-                listOfNotesNot.Remove(note);
-            }
+            listOfNotesNot.Remove(note);
             numberOfNotes--;
         }
         public void addNoteListNotif() {
