@@ -12,3 +12,6 @@ C:\Users\Samuraj\source\repos\Pawel_Karbowski_projekt\obj\Debug\Pawel_Karbowski_
 C:\Users\Samuraj\source\repos\Pawel_Karbowski_projekt\obj\Debug\Pawel_Karbowski_projekt.FormEdit.resources
 C:\Users\Samuraj\source\repos\Pawel_Karbowski_projekt\obj\Debug\Pawel_Karbowski_projekt.FormOpen.resources
 C:\Users\Samuraj\source\repos\Pawel_Karbowski_projekt\obj\Debug\Pawel_Karbowski_projekt.FormNotification.resources
+C:\Users\Samuraj\source\repos\Pawel_Karbowski_projekt\obj\Debug\Pawel_Karbowski_projekt.csproj.CopyComplete
+C:\Users\Samuraj\source\repos\Pawel_Karbowski_projekt\bin\Debug\System.ValueTuple.dll
+C:\Users\Samuraj\source\repos\Pawel_Karbowski_projekt\bin\Debug\System.ValueTuple.xml
