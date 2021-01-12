@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ClassDiagram MajorVersion="1" MinorVersion="1">
   <Class Name="Pawel_Karbowski_projekt.Note">
-    <Position X="12" Y="3.25" Width="1.5" />
+    <Position X="12" Y="4.75" Width="1.5" />
     <AssociationLine Name="importance" Type="Pawel_Karbowski_projekt.Importance">
       <MemberNameLabel ManuallyPlaced="true" ManuallySized="true">
         <Position X="-1.182" Y="0.111" Height="0.182" Width="1.097" />
@@ -48,9 +48,11 @@
         <Point X="6.75" Y="10.196" />
         <Point X="8.167" Y="10.196" Type="JumpStart" />
         <Point X="8.333" Y="10.196" Type="JumpEnd" />
+        <Point X="10.417" Y="10.196" Type="JumpStart" />
+        <Point X="10.583" Y="10.196" Type="JumpEnd" />
         <Point X="11.625" Y="10.196" />
-        <Point X="11.625" Y="3.875" />
-        <Point X="12" Y="3.875" />
+        <Point X="11.625" Y="5.375" />
+        <Point X="12" Y="5.375" />
       </Path>
     </AssociationLine>
     <TypeIdentifier>
@@ -65,11 +67,6 @@
   </Class>
   <Class Name="System.Windows.Forms.Form" Collapsed="true">
     <Position X="6" Y="0.5" Width="1.5" />
-    <NestedTypes>
-      <Class Name="System.Windows.Forms.Form.ControlCollection" Collapsed="true">
-        <TypeIdentifier />
-      </Class>
-    </NestedTypes>
     <TypeIdentifier />
   </Class>
   <Class Name="Pawel_Karbowski_projekt.Program">
@@ -82,9 +79,12 @@
   <Class Name="Pawel_Karbowski_projekt.FormNotification">
     <Position X="9.75" Y="4.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAACAAABAAAECAAIACAQAAAABAAABAAAAAAQQ=</HashCode>
+      <HashCode>gAAAAAAAACAAABAAA0CAAIACAQAAAABAAABAAAAAAQY=</HashCode>
       <FileName>FormNotification.cs</FileName>
     </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="mainForm" />
+    </ShowAsAssociation>
   </Class>
   <Class Name="Pawel_Karbowski_projekt.MainForm">
     <Position X="0.5" Y="2" Width="1.5" />
@@ -99,18 +99,25 @@
     <AssociationLine Name="formEdit" Type="Pawel_Karbowski_projekt.FormEdit" ManuallyRouted="true" FixedFromPoint="true" FixedToPoint="true">
       <Path>
         <Point X="1.938" Y="2" />
-        <Point X="1.938" Y="2.133" />
-        <Point X="3.971" Y="2.133" Type="JumpStart" />
-        <Point X="4.138" Y="2.133" Type="JumpEnd" />
-        <Point X="5.594" Y="2.133" />
+        <Point X="1.938" Y="1.814" />
+        <Point X="5.594" Y="1.814" />
         <Point X="5.594" Y="4" />
+      </Path>
+    </AssociationLine>
+    <AssociationLine Name="formOpen" Type="Pawel_Karbowski_projekt.FormOpen" ManuallyRouted="true">
+      <Path>
+        <Point X="2" Y="11.881" />
+        <Point X="2.225" Y="11.881" />
+        <Point X="2.225" Y="12.197" />
+        <Point X="8.25" Y="12.197" />
+        <Point X="8.25" Y="8.896" />
       </Path>
     </AssociationLine>
     <AssociationLine Name="formNotification" Type="Pawel_Karbowski_projekt.FormNotification" ManuallyRouted="true" FixedFromPoint="true" FixedToPoint="true">
       <Path>
         <Point X="2" Y="2.386" />
-        <Point X="3.971" Y="2.386" Type="JumpStart" />
-        <Point X="4.138" Y="2.386" Type="JumpEnd" />
+        <Point X="4.073" Y="2.386" Type="JumpStart" />
+        <Point X="4.24" Y="2.386" Type="JumpEnd" />
         <Point X="4.671" Y="2.386" />
         <Point X="4.671" Y="2.812" />
         <Point X="5.511" Y="2.812" Type="JumpStart" />
@@ -124,7 +131,7 @@
       </Path>
     </AssociationLine>
     <TypeIdentifier>
-      <HashCode>SAAAwgCTECgAAFAECACAAAATMSApMAxAIREBAACAAQU=</HashCode>
+      <HashCode>SAAAwgCTECgAAFAECACAAICTMSApMAxAIREBgAAAAQU=</HashCode>
       <FileName>MainForm.cs</FileName>
     </TypeIdentifier>
     <ShowAsAssociation>
@@ -136,7 +143,7 @@
     <Lollipop Position="0.2" />
   </Class>
   <Interface Name="Pawel_Karbowski_projekt.IListOfNotes">
-    <Position X="0.5" Y="12.5" Width="1.5" />
+    <Position X="0.5" Y="13.25" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAEAAAAAAAAAAAAEAAAAAAAAAAAAAA=</HashCode>
       <FileName>IListOfNotes.cs</FileName>
@@ -164,7 +171,7 @@
     </TypeIdentifier>
   </Enum>
   <Enum Name="Pawel_Karbowski_projekt.Extension">
-    <Position X="14.5" Y="3.5" Width="1.5" />
+    <Position X="14" Y="3.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAA=</HashCode>
       <FileName>ExtensionEnum.cs</FileName>
