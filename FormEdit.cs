@@ -88,18 +88,8 @@ namespace Pawel_Karbowski_projekt
                 return;
             }
         }
-        private void LoadTextFromFile() {
-            fileEName = MainForm.rootFolder + "\\" + noteEdit.Name + "." + noteEdit.extension;
-            if (noteEdit.extension.Equals(Extension.TXT))
-            {
-                fileEText = File.ReadAllText(fileEName, Encoding.UTF8);
-                richTextBox1.Text = fileEText;
-            }
-            else if (noteEdit.extension.Equals(Extension.RTF)) {
-                richTextBox1.LoadFile(fileEName, RichTextBoxStreamType.RichText);
-            }
-        }
-        private void SaveEditNote(Note saveNote) {
+        private void SaveEditNote(Note saveNote)
+        {
             if (noteEdit.extension.Equals(Extension.TXT))
             {
                 StreamWriter createLocalFile = new StreamWriter(fileEName);
@@ -115,6 +105,17 @@ namespace Pawel_Karbowski_projekt
             mainForm.saveNoteList(saveNote);
             mainForm.AddListView(saveNote);
             mainForm.ListSerializer();
+        }
+        private void LoadTextFromFile() {
+            fileEName = MainForm.rootFolder + "\\" + noteEdit.Name + "." + noteEdit.extension;
+            if (noteEdit.extension.Equals(Extension.TXT))
+            {
+                fileEText = File.ReadAllText(fileEName, Encoding.UTF8);
+                richTextBox1.Text = fileEText;
+            }
+            else if (noteEdit.extension.Equals(Extension.RTF)) {
+                richTextBox1.LoadFile(fileEName, RichTextBoxStreamType.RichText);
+            }
         }
     }
 }

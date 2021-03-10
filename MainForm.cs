@@ -225,6 +225,13 @@ namespace Pawel_Karbowski_projekt
         public void RemoveListView(ListViewItem listViewItem) {
             listViewItem.Remove();
         }
+        public void addNoteListView()
+        {
+            foreach (Note lnote in ListOfNotes)
+            {
+                AddListView(lnote);
+            }
+        }
         public void ListSerializer()
         {
             TextWriter writeFileCfg = new StreamWriter(cfgFile);
@@ -247,13 +254,6 @@ namespace Pawel_Karbowski_projekt
             ListOfNotes.Add(note);
             if (note.IsNotification) {
                 listOfNotesNot.Add(note);
-            }
-        }
-        public void addNoteListView()
-        {
-            foreach (Note lnote in ListOfNotes)
-            {
-                AddListView(lnote);
             }
         }
         public void delNoteList(Note note)

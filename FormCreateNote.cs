@@ -124,6 +124,16 @@ namespace Pawel_Karbowski_projekt
             else
             {
                 DialogResult wynikDodania = MessageBox.Show("Notatka została utworzona");
+                if (isNotifiactionCNote) {
+                    if (DateTime.Parse(noteCreate.DateNote).Equals(DateTime.Today))
+                    {
+                        MessageBox.Show("Dzisiaj jest wydarzenie: " + noteCreate.Name, "Powiadomienie", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                    if (DateTime.Parse(noteCreate.DateNote).Equals(DateTime.Today.AddDays(1)))
+                    {
+                        MessageBox.Show("Jutro jest wydarzenie: " + noteCreate.Name, "Powiadomienie", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                }
                 this.Close();
             }
         }
